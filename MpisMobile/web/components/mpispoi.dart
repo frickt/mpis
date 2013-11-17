@@ -1,6 +1,6 @@
 import 'dart:html';
 import 'package:polymer/polymer.dart';
-import '../../lib/poistore.dart';
+import '../poistore.dart';
 import '../mpismobile.dart';
 
 
