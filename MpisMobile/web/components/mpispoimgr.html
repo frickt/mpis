@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<link rel="import" href="mpispoi.html">
+</head>
+<body>
+  <polymer-element name="mpis-poimgr"> <template>
+
+  <div>
+    <p>Enter a point of interest</p>
+
+    <input type="text" name="newPointOfInterestTitle"
+      value="{{newPointOfInterestTitle}}"> <input type="text"
+      name="newPointOfInterestLatitude"
+      value="{{newPointOfInterestLatitude}}"> <input type="text"
+      name="newPointOfInterestLongitude"
+      value="{{newPointOfInterestLongitude}}"> <input
+      type="text" name="newPointOfInterestDescr"
+      value="{{newPointOfInterestDescr}}">
+    <button on-click="{{addPointOfInterest}}" id="addbutton">+</button>
+
+    <ul>
+      <template bind if='{{appObj.hazPointsOfInterest}}'> <template
+        repeat="{{appObj.pois}}">
+      <li><mpis-poi poi="{{}}"></mpis-poi></li>
+      </template> </template>
+    </ul>
+  </div>
+  <div>
+    <button on-click="{{clear}}" id="clearbutton">Clear</button>
+    <button on-click="{{loadDummy}}" id="loadDummybutton">Load
+      Dummy POI</button>
+    <p style="color: red">{{errorMsg}}</p>
+  </div>
+
+  </template> <script type="application/dart" src="mpispoimgr.dart"></script> </polymer-element>
+</body>
+</html>
