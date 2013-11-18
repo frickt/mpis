@@ -1,4 +1,4 @@
-library mpis.models;
+library poistore;
 
 import 'package:polymer/polymer.dart';
 import 'dart:async';

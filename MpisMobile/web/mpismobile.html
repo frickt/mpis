@@ -3,16 +3,17 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Sample app</title>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script src="packages/browser/interop.js"></script>
-<script src="packages/browser/dart.js"></script>
+<title>Trip Manager</title>
 <link rel="stylesheet" href="mpismobile.css">
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
+<!-- import components -->
 <link rel="import" href="components/mpismaps.html">
 <link rel="import" href="components/mpispoimgr.html">
 
+<script src="packages/browser/interop.js"></script>
 <script type="application/dart" src="mpismobile.dart"></script>
+<script src="packages/browser/dart.js"></script>
 
 </head>
 <body>
@@ -20,7 +21,8 @@
   <h1>MpisMobile</h1>
   <p>Hello world from Dart!</p>
   <mpis-poimgr id="count_down"></mpis-poimgr>
-  <mpis-maps id="myMap"></mpis-maps>
-
+  <mpis-maps id="myMap"></mpis-maps> 
+  
+ 
 </body>
 </html>
