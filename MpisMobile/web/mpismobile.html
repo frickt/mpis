@@ -3,26 +3,39 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Trip Manager</title>
+<title>Trip Manager 1000</title>
 <link rel="stylesheet" href="mpismobile.css">
+
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="packages/browser/interop.js"></script>
+<script src="packages/browser/dart.js"></script>
+
 
 <!-- import components -->
 <link rel="import" href="components/mpismaps.html">
 <link rel="import" href="components/mpispoimgr.html">
-
-<script src="packages/browser/interop.js"></script>
-<script type="application/dart" src="mpismobile.dart"></script>
-<script src="packages/browser/dart.js"></script>
+<link rel="import" href="components/mpistripmgr.html">
 
 </head>
 <body>
+
+  <polymer-ui-pages selected="0">
+      <span>One</span>
+      <span>Two</span>
+      <span>Three</span>
+      <span>Four</span>
+      <span>Five</span>
+  </polymer-ui-pages>
 
   <h1>MpisMobile</h1>
   <p>Hello world from Dart!</p>
   <mpis-poimgr id="count_down"></mpis-poimgr>
   <mpis-maps id="myMap"></mpis-maps> 
+  <mpis-tripmgr></mpis-tripmgr>
   
- 
+
+    
+  <script type="application/dart" src="mpismobile.dart"></script>
+  
 </body>
 </html>

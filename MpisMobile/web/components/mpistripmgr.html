@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<link rel="import" href="mpistrip.html">
+</head>
+<body>
+  <polymer-element name="mpis-tripmgr"> <template>
+
+  <div>
+    <p>Create Trip</p>
+
+    <input type="text" name="newTripTitle" value="{{newTripTitle}}"> 
+    <button on-click="{{addTrip}}" id="addbutton">+</button>
+
+    <p>List of Trips</p>
+    <ul>
+      <template bind if='{{appObj.hazTrips}}'> 
+        <template repeat="{{appObj.trips}}">
+        <li><mpis-trip trip="{{}}"></mpis-trip></li>
+        </template> 
+      </template>
+    </ul>
+  </div>
+  </template> 
+  <script type="application/dart" src="mpistripmgr.dart"></script> </polymer-element>
+</body>
+</html>

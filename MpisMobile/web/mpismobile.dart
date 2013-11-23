@@ -5,7 +5,9 @@ import 'package:polymer/polymer.dart';
 import 'package:js/js.dart' as js;
 import 'package:google_maps/google_maps.dart';
 import 'poistore.dart';
+import 'tripstore.dart';
 import 'components/mpismaps.dart' as map;
+
 
 
 /*
@@ -16,7 +18,9 @@ import 'components/mpismaps.dart' as map;
  * between the MODEL (PointOfInterest & PointOfInterestStore)
  * and the VIEW (CountDownComponent & MilestoneComponent).
  * 
- * Manages a PointsOfInterest to update the points of interest.
+ * Manages a PointsOfInterest.
+ * Manages a Trips.
+ * 
  */
 
 MpisApp appObject = new MpisApp();
@@ -30,12 +34,20 @@ class MpisApp extends Observable {
   
   // A place to save the points of interest (is the MODEL).
   PointOfInterestStore _store = new PointOfInterestStore();
-  
+  TripStore _tripStore = new TripStore();
+ 
   // Called from the VIEW.
   @observable bool hazPointsOfInterest;
     
+  // Called from the VIEW.
+  @observable bool hazTrips;
+
   // The list of points of interest in the MODEL.
   List<PointOfInterest> get pois => _store.pois;
+  
+// The list of trips in the MODEL.
+  List<Trip> get trips => _tripStore.trips;
+  
   
   map.GMapElement mapElem;
   
@@ -44,14 +56,27 @@ class MpisApp extends Observable {
    */
   
   // Called from the VIEW when the element is inserted into the DOM.
-  Future start() {
+  Future startPoiStore() {
     if (!idbAvailable) {
-      return new Future.error('IndexedDB not supported.');
+      return new Future.error('IndexedDB for TripStore not supported.');
     }
     
     return _store.open().then((_) {
       hazPointsOfInterest = notifyPropertyChange(const Symbol('hazPointsOfInterest'),
           hazPointsOfInterest, (pois.length == 0) ? false : true);
+
+    });
+  }
+  
+  // Called from the VIEW when the element is inserted into the DOM.
+  Future startTripStore() {
+    if (!idbAvailable) {
+      return new Future.error('IndexedDB for TripStore not supported.');
+    }
+    
+    return _tripStore.open().then((_) {
+      hazTrips = notifyPropertyChange(const Symbol('hazTrips'),
+          hazTrips, (trips.length == 0) ? false : true);
 
     });
   }
@@ -90,6 +115,29 @@ class MpisApp extends Observable {
           hazPointsOfInterest, (pois.length == 0) ? false : true);
     });    
   }
+
+  /****
+   * Click handlers...
+   * Called from the VIEW (mpistripmgr) when the user clicks a button.
+   * Delegates to MODEL.
+   */  
+  void addTrip(String title, List<PointOfInterest> pois) {
+    // Make sure PointOfInterest is in the future, and not in the past.
+    _tripStore.add(title, pois).then((_) {
+      hazTrips = notifyPropertyChange(const Symbol('hazTrips'),
+          hazTrips, (trips.length == 0) ? false : true);
+    },
+    onError: (e) { print('duplicate key'); } );    
+  }
+
+  Future removeTrip(Trip trip) {
+    return _tripStore.remove(trip).then((_) {
+      hazTrips = notifyPropertyChange(const Symbol('hazTrips'),
+          hazTrips, (pois.length == 0) ? false : true);
+   });
+  }
+  
+
   
   void loadDummyData() {
     if(!appObject.hazPointsOfInterest) {

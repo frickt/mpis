@@ -3,6 +3,7 @@ description: A sample Polymer application
 dependencies:
   google_maps: any
   polymer: any
+  polymer_elements: any
 transformers:
 - polymer:
     entry_points: web/mpismobile.html

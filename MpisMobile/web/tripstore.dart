@@ -109,7 +109,7 @@ class TripStore {
   // 
   // This returns a Future with the new Trip when the Trip
   // has been added.
-  Future<Trip> add(String title) {
+  Future<Trip> add(String title, List<PointOfInterest> pois) {
     var trip = new Trip(title);
     var TripAsMap = trip.toRaw();
 
