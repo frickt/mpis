@@ -8,24 +8,35 @@
 
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="packages/browser/interop.js"></script>
-<script src="packages/browser/dart.js"></script>
-
 
 <!-- import components -->
+<link rel="import" href="packages/polymer_ui_elements/polymer_ui_pages/polymer_ui_pages.html">
+
 <link rel="import" href="components/mpismaps.html">
 <link rel="import" href="components/mpispoimgr.html">
 <link rel="import" href="components/mpistripmgr.html">
+
 
 </head>
 <body>
 
   <h1>MpisMobile</h1>
   <p>Hello world from Dart!</p>
-  <mpis-poimgr id="count_down"></mpis-poimgr>
-  <mpis-maps id="myMap"></mpis-maps> 
-  <mpis-tripmgr></mpis-tripmgr>
+   
+  <polymer-ui-pages selected="0">
+    <span>   
+      <mpis-maps id="myMap"></mpis-maps>
+    </span> 
+    <span>
+      <mpis-poimgr></mpis-poimgr>
+    </span>
+    <span>
+      <mpis-tripmgr></mpis-tripmgr>
+    </span>
+  </polymer-ui-pages>
     
   <script type="application/dart" src="mpismobile.dart"></script>
+  <script src="packages/browser/dart.js"></script>
   
 </body>
 </html>
